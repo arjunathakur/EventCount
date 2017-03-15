@@ -3,10 +3,10 @@ var _source = _os.hostname();
 var _interval = parseInt(process.argv[1]) || 1000;
 var _last; function poll()
 {
-   var EVENTs = _os.EVENTs();
-   for(var idx = 0; idx < EVENTs.length; idx++)
+   var cpus = _os.cpus();
+   for(var idx = 0; idx < cpus.length; idx++)
    {
-       var e = EVENTs[idx];
+       var e = cpus[idx];
        e.total = 0;
        for(var t in e.times)
            e.total += e.times[t];
@@ -14,17 +14,17 @@ var _last; function poll()
 
    if (_last)
        {
-           for(var idx = 0; idx < EVENTs.length; idx++)
+           for(var idx = 0; idx < cpus.length; idx++)
            {
-               var e = EVENTs[idx];
+               var e = cpus[idx];
                var l = _last[idx];
                var user = (e.times.user - l.times.user) /
                           (e.total - l.total);
 
-               console.log('NOEVENTS %d %s-%d', user, _source, idx + 1);
+               console.log('CPU_CORE %d %s-%d', user, _source, idx + 1);
            }
        }
-       _last = EVENTs;
+       _last = cpus;
        setTimeout(poll, _interval);
    }
 
