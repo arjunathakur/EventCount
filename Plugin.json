@@ -1,0 +1,18 @@
+{
+    "description" : "Scans the given device and Returns No. of Events",
+    "icon" : "icon.png",
+    "command" : "node index.js $(pollInterval) $(devices)",
+    "postExtract" : "npm install",
+    "ignore" : "node_modules",
+    "metrics" : ["NOEVENTS"],
+    "paramSchema" : [
+        {
+            "title" : "Devices",
+            "description" : "The set of device mountings to check for free space.",
+            "type" : "array",
+            "items" : {
+                "type" : "string"
+            }
+        }
+    ]
+}
